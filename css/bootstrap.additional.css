@@ -1,0 +1,16 @@
+body {
+	padding-top: 60px;
+}
+tr.Unfinished > td {
+	background-color: #FF988D !important;
+}
+.clock_number {
+	font-size: 24pt;
+	color: #fff;
+	float: left;
+	padding: 10px 5px;
+	margin: 1px;
+	border: 1px solid #000;
+	background-color: #000;
+	border-radius: 3px;
+}

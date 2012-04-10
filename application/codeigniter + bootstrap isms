@@ -1,0 +1,7 @@
+codeigniter/bootstrap
+open form
+<?=form_open("/auth/login/",array('class'=>'form-horizontal'))?>
+
+
+date from mysql: $item['maildate'] = date("d/m/Y",strtotime($item['maildate']));
+date to mysql: 'date_last_modified'=>date ("Y-m-d H:i:s",time()),
