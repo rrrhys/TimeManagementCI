@@ -2,6 +2,7 @@
 
 class Auth_model extends CI_Model 
 {
+	/*Add a test to see if it flows downstream*/
 	public $errors = array();
     function __construct()
     {
