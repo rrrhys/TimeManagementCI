@@ -4,6 +4,7 @@ class Auth_model extends CI_Model
 {
 	/*Add a test to see if it flows downstream*/
 	/*Add a change to the downstream repo*/
+	/*Now add another upstream and see what git does.*/
 	public $errors = array();
     function __construct()
     {
