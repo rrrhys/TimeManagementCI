@@ -4,3 +4,4 @@
 */cache/*
 */cache/!index.html
 user_guide/*
+.DS_Store
