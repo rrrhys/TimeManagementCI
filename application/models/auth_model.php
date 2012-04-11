@@ -2,10 +2,13 @@
 
 class Auth_model extends CI_Model 
 {
+<<<<<<< HEAD
 	/*another test upstream*/
 	/*Add a test to see if it flows downstream*/
 	/*Add a change to the downstream repo*/
 	/*Now add another upstream and see what git does.*/
+=======
+>>>>>>> origin/master
 	public $errors = array();
     function __construct()
     {
@@ -59,12 +62,19 @@ class Auth_model extends CI_Model
 		
 		if($q)
 		{
+<<<<<<< HEAD
 		$grav_hash = md5(strtolower(trim($q['email_address'])));
 		$this->session->set_userdata(array(
 		'email_address'=>$q['email_address'],
 		'id'=>$q['id'],
 		'auth_level'=>$q['auth_level'],
 		'gravatar_url'=>"http://www.gravatar.com/avatar/".$grav_hash));
+=======
+		$this->session->set_userdata(array(
+		'email_address'=>$q['email_address'],
+		'id'=>$q['id'],
+		'auth_level'=>$q['auth_level']));
+>>>>>>> origin/master
 		return true;
 		
 		}

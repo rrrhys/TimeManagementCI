@@ -23,8 +23,12 @@ class MY_Controller extends CI_Controller {
 	 				 'bad_flash'=>$this->session->flashdata('bad'),
 	 				 'good_flash'=>$this->session->flashdata('good'),
 	 				 'warning_flash'=>$this->session->flashdata('warning'),
+<<<<<<< HEAD
 	 				 'logged_in'=>$this->session->userdata('id'),
 	 				 'gravatar_url'=>$this->session->userdata('gravatar_url') . "?s=20?d=mm");
+=======
+	 				 'logged_in'=>$this->session->userdata('id'));
+>>>>>>> origin/master
 	 }
 	 function __construct(){
 	 	parent::__construct();
@@ -50,6 +54,7 @@ class MY_Controller extends CI_Controller {
 	 		break;
 	 	}
 	 }
+<<<<<<< HEAD
 	 public function _is_authorised(){
 	 	if(!$this->session->userdata('id')){
 	 		redirect("/auth/login");
@@ -62,6 +67,8 @@ class MY_Controller extends CI_Controller {
 			redirect($redirect_url);	
 		}
 	 }
+=======
+>>>>>>> origin/master
 }
 
 /* End of file welcome.php */

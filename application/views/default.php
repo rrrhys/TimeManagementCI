@@ -15,9 +15,12 @@
 					<li><a href="/auth/login">Login</a></li>
 					<li><a href="/auth/register">Register</a></li>
 				<?}else{?>
+<<<<<<< HEAD
 				
 					<li><a href="/app/profile"><img src="<?=$gravatar_url?>" /> <?=$this->session->userdata('email_address')?></a></li>
 					<li><a href="/auth/logout">Dashboard</a></li>
+=======
+>>>>>>> origin/master
 					<li><a href="/auth/logout">Logout</a></li>
 				<?}?>
 				</ul>

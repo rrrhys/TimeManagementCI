@@ -21,8 +21,14 @@ class App extends MY_Controller {
      function __construct(){
 	 	parent::__construct();
 	 	$this->load->model('timeclock_model','timeclock');
+<<<<<<< HEAD
 	 	
 		$this->_redirect_if_not_logged_in();
+=======
+	 	if(!$this->session->userdata('id')){
+	 		redirect("/auth/login");
+	 	}
+>>>>>>> origin/master
 	 }
 	public function index()
 	{
@@ -36,7 +42,11 @@ class App extends MY_Controller {
 		$this->output('welcome_message',$page_data);
 	}
 	public function dashboard(){
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> origin/master
 		$page_data = $this->page_data_base();
 			$page_data['page_title'] = "Dashboard";
 			$page_data['page_heading'] = "Dashboard";

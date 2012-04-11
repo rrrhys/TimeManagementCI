@@ -3,5 +3,9 @@
 */logs/!index.html
 */cache/*
 */cache/!index.html
+<<<<<<< HEAD
 user_guide/*
 .DS_Store
+=======
+user_guide/*
+>>>>>>> origin/master
