@@ -4,12 +4,15 @@ app.update_display_clock = function(){
 	var datetime_current = new Date();
 	var datetime_minutes = Math.round((datetime_current - datetime_started)/1000/60);
 	var datetime_hours = 0;
-	while(datetime_minutes > 60){
-		datetime_minutes -=60;
-		datetime_hours +=1;
-	}
+
 	if(isNaN(datetime_minutes)){
 		datetime_minutes = "0";
+	}
+	else{
+			while(datetime_minutes > 60){
+				datetime_minutes -=60;
+				datetime_hours +=1;
+			}
 	}
 	var hours_string = datetime_hours + "";
 	while(hours_string.length < 2){

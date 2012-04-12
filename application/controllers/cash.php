@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class App extends MY_Controller {
+class Cash extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -17,10 +17,11 @@ class App extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	 public $dashboard = "/app/dashboard/";
+	 public $dashboard = "/cash/dashboard/";
 	 public $login = "/auth/login";
      function __construct(){
 	 	parent::__construct();
+	 	$this->load->model('finance_model','finance');
 	 	$this->load->model('timeclock_model','timeclock');
 
 		$this->_redirect_if_not_logged_in();
@@ -38,11 +39,32 @@ class App extends MY_Controller {
 	}
 	public function dashboard(){
 		$page_data = $this->page_data_base();
-			$page_data['page_title'] = "Dashboard";
-			$page_data['page_heading'] = "Dashboard";
-			$page_data['times_entered'] = $this->timeclock->list_jobs($this->session->userdata('id'));
-			$page_data['current_job'] = $this->timeclock->get_current_job($this->session->userdata('id'));
-		$this->output('app/dashboard',$page_data);		
+			$page_data['page_title'] = "Cash Dashboard";
+			$page_data['page_heading'] = "Cash Dashboard";
+			$page_data['movements'] = $this->finance->get_movements($this->session->userdata('id'));
+			$page_data['current_balance'] = $this->finance->get_balance($this->session->userdata('id'));
+		$this->output('cash/dashboard',$page_data);		
+	}
+	public function movement(){
+		if(!$this->input->post("submitted")){
+			$page_data = $this->page_data_base();
+			$page_data['page_title'] = "New cash movement";
+			$page_data['page_heading'] = "New cash movement";
+			$this->output('cash/movement',$page_data);					
+
+		}
+		else{
+			if($this->finance->cash_movement($this->session->userdata('id'),
+					$this->input->post("cash_amount"),
+					$this->input->post("reference"))){
+						$this->session->set_flashdata('good','New movement added.');
+						redirect($this->dashboard);
+					}
+					else{
+						$this->session->set_flashdata('bad',implode("<br />", $this->finance->errors));
+						redirect("cash/movement");
+					}			
+			}
 	}
 	public function finish_job($job_id){
 		if(!$this->input->post("submitted")){
@@ -50,7 +72,7 @@ class App extends MY_Controller {
 			$page_data['page_title'] = "Finish job";
 			$page_data['page_heading'] = "Finish Job";
 			$page_data['job'] = $this->timeclock->get_job($job_id,$this->session->userdata('id'));
-			$this->output('app/finish_job',$page_data);	
+			$this->output('cash/finish_job',$page_data);	
 		}else{
 			$job = array();
 			$job['finished?'] = true;
@@ -63,7 +85,7 @@ class App extends MY_Controller {
 			}
 			else{
 				$this->session->set_flashdata('bad',implode("<br />",$this->timeclock->errors));
-				redirect("/app/finish_job/$job_id");
+				redirect("/cash/finish_job/$job_id");
 			}
 		}
 	}
@@ -73,7 +95,7 @@ class App extends MY_Controller {
 			$page_data['page_heading'] = "View Job";
 			$page_data['edit_disabled'] = true;
 			$page_data['job'] = $this->timeclock->get_job($job_id,$this->session->userdata('id'));
-			$this->output('app/view_job',$page_data);			
+			$this->output('cash/view_job',$page_data);			
 	}
 	public function edit_job($job_id){
 		if(!$this->input->post("submitted")){
@@ -82,7 +104,7 @@ class App extends MY_Controller {
 			$page_data['page_heading'] = "Edit Job";
 			$page_data['edit_disabled'] = false;
 			$page_data['job'] = $this->timeclock->get_job($job_id,$this->session->userdata('id'));
-			$this->output('app/view_job',$page_data);
+			$this->output('cash/view_job',$page_data);
 			}else{
 			$job = array();
 			$job['finished?'] = false;
@@ -94,7 +116,7 @@ class App extends MY_Controller {
 				}
 				else{
 						$this->session->set_flashdata('bad',implode("<br />", $this->timeclock->errors));
-						redirect("app/edit_job/" . $job_id);					
+						redirect("cash/edit_job/" . $job_id);					
 				}
 			}	
 	}
@@ -108,7 +130,7 @@ class App extends MY_Controller {
 			if($current_job){
 			$page_data['warning_flash'] = "You are currently working on another job. If you start a new job, that one will automatically be marked as finished. <a href='/app/view_job/{$current_job['id']}'> <br /><i class='icon-chevron-right'></i> Go to Active Job</a>";
 			}
-			$this->output('app/new_job',$page_data);		
+			$this->output('cash/new_job',$page_data);		
 		}else{
 			if($this->timeclock->start_job($this->input->post("customer_name"),
 					$this->input->post("work_type"),
@@ -121,7 +143,7 @@ class App extends MY_Controller {
 					}
 					else{
 						$this->session->set_flashdata('bad',implode("<br />", $this->timeclock->errors));
-						redirect("app/new_job");
+						redirect("cash/new_job");
 					}
 		}
 	}

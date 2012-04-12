@@ -38,7 +38,6 @@ class Timeclock_model extends CI_Model
     	$this->db->update('times_entered',$update_array);
     	return true;
     }
-<<<<<<< HEAD
     public function get_customers($owner_id){
     	$q = $this->db->query("select distinct customer_name from times_entered")->result_array();
       $customers = array();
@@ -48,8 +47,6 @@ class Timeclock_model extends CI_Model
       return $customers;
 
     }
-=======
->>>>>>> origin/master
    	public function start_job($customer_name,$work_type,$job_number,$work_description,$work_comments,$owner_id){
    		$this->load->helper('date');
 
