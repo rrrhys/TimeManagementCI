@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(function(){
 	app.update_display_clock();
-	window.setInterval(app.update_display_clock,20000);
+	//window.setInterval(app.update_display_clock,20000);
 })
 </script>
 	<table class="table table-striped span8">

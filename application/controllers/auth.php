@@ -77,7 +77,7 @@ class Auth extends MY_Controller {
 		}
 		else
 		{
-			$page_data = $this->page_data_base;
+			$page_data = $this->page_data_base();
 			$page_data['page_title'] = "Register";
 			$page_data['page_heading'] = "Create Account";
 			$this->output("register",$page_data);

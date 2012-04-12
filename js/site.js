@@ -20,8 +20,9 @@ app.update_display_clock = function(){
 	}
 	var minutes_string = datetime_minutes + "";
 	while(minutes_string.length < 2){
-		hours_string = "0" + hours_string;
+		minutes_string = "0" + minutes_string;
 	}
 	$("#clock_number_1").html(hours_string);
 	$("#clock_number_2").html(minutes_string);
+	window.setTimeout(app.update_display_clock,20000);
 }
